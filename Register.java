@@ -1,5 +1,3 @@
-import java.awt.FlowLayout;
-
 import javax.swing.*;
 
 public class Register extends JFrame{
@@ -49,7 +47,9 @@ public class Register extends JFrame{
         bdaydays.setBounds(260,145,100,25);
         add(bdaydays);
 
-        String[] years = {"2020","2021"};
+        String[] years = new String[50];
+        for (int i = 0; i < years.length; i++) {
+            years[i] = 1975 + i + "";}
         JComboBox<String> bdayyears = new JComboBox<>(years);
         bdayyears.setBounds(395,145,100,25);
         add(bdayyears);
