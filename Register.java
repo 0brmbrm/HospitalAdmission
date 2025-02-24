@@ -54,6 +54,20 @@ public class Register extends JFrame{
         bdayyears.setBounds(395,145,100,25);
         add(bdayyears);
 
+        JLabel gender = new JLabel("Gender:");
+        gender.setBounds(30,210,150, 50);
+        add(gender);
+
+        JRadioButton male = new JRadioButton("Male");
+        male.setBounds(125,226,70,25);
+        JRadioButton female = new JRadioButton("Female");
+        female.setBounds(200,226,100,25);
+        ButtonGroup genders = new ButtonGroup();
+        genders.add(male);
+        genders.add(female);
+        add(male);
+        add(female);
+
 
 
         
