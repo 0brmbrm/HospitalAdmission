@@ -14,13 +14,13 @@ public class Register extends JFrame{
         add(name);
 
         JLabel surexample = new JLabel("Surname");
-        surexample.setBounds(125,85,200,50);
+        surexample.setBounds(125,75,200,50);
         add(surexample);
         JLabel firexample = new JLabel("First Name");
-        firexample.setBounds(260,85,200,50);
+        firexample.setBounds(260,75,200,50);
         add(firexample);
         JLabel midexample = new JLabel("Middle Name");
-        midexample.setBounds(395,85,200,50);
+        midexample.setBounds(395,75,200,50);
         add(midexample);
 
         JTextField surname = new JTextField();
@@ -55,18 +55,22 @@ public class Register extends JFrame{
         add(bdayyears);
 
         JLabel gender = new JLabel("Gender:");
-        gender.setBounds(30,210,150, 50);
+        gender.setBounds(30,195,150, 50);
         add(gender);
 
         JRadioButton male = new JRadioButton("Male");
-        male.setBounds(125,226,70,25);
+        male.setBounds(125,210,70,25);
         JRadioButton female = new JRadioButton("Female");
-        female.setBounds(200,226,100,25);
+        female.setBounds(200,210,100,25);
         ButtonGroup genders = new ButtonGroup();
         genders.add(male);
         genders.add(female);
         add(male);
         add(female);
+
+        JLabel contact = new JLabel("Contact Information:");
+        contact.setBounds(30,250,150, 50);
+        add(contact);
 
 
 
