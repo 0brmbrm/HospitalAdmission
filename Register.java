@@ -47,9 +47,9 @@ public class Register extends JFrame{
         bdaydays.setBounds(260,145,100,25);
         add(bdaydays);
 
-        String[] years = new String[50];
+        String[] years = new String[100];
         for (int i = 0; i < years.length; i++) {
-            years[i] = 1975 + i + "";}
+            years[i] = 2025 - i + "";}
         JComboBox<String> bdayyears = new JComboBox<>(years);
         bdayyears.setBounds(395,145,100,25);
         add(bdayyears);
@@ -71,6 +71,20 @@ public class Register extends JFrame{
         JLabel contact = new JLabel("Contact Information:");
         contact.setBounds(30,250,150, 50);
         add(contact);
+
+        JLabel numinfo = new JLabel("Contact Number");
+        numinfo.setBounds(115,310,150, 50);
+        add(numinfo);
+        JLabel emailinfo = new JLabel("Email");
+        emailinfo.setBounds(315,310,150, 50);
+        add(emailinfo);
+
+        JTextField number = new JTextField();
+        number.setBounds(100,300, 150, 25);
+        add(number);
+        JTextField email = new JTextField();
+        email.setBounds(300,300, 150, 25);
+        add(email);
 
 
 
