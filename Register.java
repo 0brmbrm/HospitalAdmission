@@ -119,6 +119,7 @@ public class Register extends JFrame{
                 bdaymonth.setSelectedIndex(0); bdaydays.setSelectedIndex(0); bdayyears.setSelectedIndex(0);
                 genders.clearSelection();
                 number.setText(""); email.setText("");
+                ress.setText("");
             }
         });
 
@@ -140,5 +141,4 @@ public class Register extends JFrame{
             }
         });
     }
-
 }

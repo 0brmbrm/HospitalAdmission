@@ -1,7 +1,6 @@
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
 
 public class KinInfo extends JFrame {
     public KinInfo(){
@@ -53,8 +52,45 @@ public class KinInfo extends JFrame {
         add(specify);
         
         JTextField others = new JTextField();
-        others.setBounds(300,200,100,25);
+        others.setBounds(300,200,150,25);
         add(others);
+
+        JButton back = new JButton("back");
+        back.setBounds(30,425,65,20);
+        add(back);
+
+        JButton clear = new JButton("clear");
+        clear.setBounds(105,425,65,20);
+        add(clear);
+
+        JButton next = new JButton("next");
+        next.setBounds(490,425,65,20);
+        add(next);
+
+        clear.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                
+            }
+        });
+
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                Register frame2 = new Register();
+                frame2.setVisible(true);
+                dispose();
+            }
+        });
+
+        next.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                JFrame frame4 = new Confirm();
+                frame4.setVisible(true);
+                dispose(); 
+            }
+        });
 
     }
 }
