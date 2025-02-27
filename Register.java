@@ -1,6 +1,5 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.*;
 
 public class Register extends JFrame{
@@ -8,7 +7,7 @@ public class Register extends JFrame{
 
         setTitle("Register Patient");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(600,500);
+        setSize(600,525);
         setResizable(false);
         setLayout(null);
 
@@ -93,16 +92,24 @@ public class Register extends JFrame{
         email.setBounds(300,285, 150, 25);
         add(email);
 
+        JLabel address = new JLabel("Address:");
+        address.setBounds(30,337,150, 50);
+        add(address);
+
+        JTextField ress = new JTextField();
+        ress.setBounds(100, 350, 350, 25);
+        add(ress);
+
         JButton back = new JButton("back");
-        back.setBounds(30,400,65,20);
+        back.setBounds(30,425,65,20);
         add(back);
 
         JButton clear = new JButton("clear");
-        clear.setBounds(105,400,65,20);
+        clear.setBounds(105,425,65,20);
         add(clear);
 
         JButton next = new JButton("next");
-        next.setBounds(490,400,65,20);
+        next.setBounds(490,425,65,20);
         add(next);
 
         clear.addActionListener(new ActionListener() {
@@ -115,13 +122,23 @@ public class Register extends JFrame{
             }
         });
 
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                Menu frame1 = new Menu();
+                frame1.setVisible(true);
+                dispose();
+            }
+        });
 
-
-        
-
-
-
-        setVisible(true);
+        next.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                JFrame frame3 = new KinInfo();
+                frame3.setVisible(true);
+                dispose();
+            }
+        });
     }
 
 }
