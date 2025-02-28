@@ -100,15 +100,15 @@ public class Register extends JFrame{
         ress.setBounds(100, 350, 350, 25);
         add(ress);
 
-        JButton back = new JButton("back");
+        JButton back = new JButton("Back");
         back.setBounds(30,425,65,20);
         add(back);
 
-        JButton clear = new JButton("clear");
+        JButton clear = new JButton("Clear");
         clear.setBounds(105,425,65,20);
         add(clear);
 
-        JButton next = new JButton("next");
+        JButton next = new JButton("Next");
         next.setBounds(490,425,65,20);
         add(next);
 
