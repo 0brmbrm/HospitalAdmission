@@ -134,9 +134,24 @@ public class Register extends JFrame{
 
         next.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e){
-                JFrame frame3 = new KinInfo();
-                frame3.setVisible(true);
+            public void actionPerformed(ActionEvent e) {
+                // Collect patient information
+                String patientSurname = surname.getText();
+                String patientFirstName = first.getText();
+                String patientMiddleName = middle.getText();
+                String patientBirthDate = bdaydays.getSelectedItem() + " " + bdaymonth.getSelectedItem() + " " + bdayyears.getSelectedItem();
+                String patientGender = male.isSelected() ? "Male" : "Female";
+                String patientContactNumber = number.getText();
+                String patientEmail = email.getText();
+                String patientAddress = ress.getText();
+        
+                Patient patient = new Patient(patientSurname, patientFirstName, patientMiddleName, patientBirthDate,
+                        patientGender, patientContactNumber, patientEmail, patientAddress);
+        
+              
+                RoomManager roomManager = new RoomManager();
+                KinInfo kinInfoFrame = new KinInfo(roomManager, patient);
+                kinInfoFrame.setVisible(true);
                 dispose();
             }
         });

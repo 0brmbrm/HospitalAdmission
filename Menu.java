@@ -2,8 +2,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class Menu extends JFrame{
-        public Menu(){
+public class Menu extends JFrame {
+    private RoomManager roomManager; 
+
+    public Menu() {
+        this.roomManager = new RoomManager(); 
         setTitle("Hospital Admission");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(500,500);
@@ -28,9 +31,8 @@ public class Menu extends JFrame{
 
         button1.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e){
-                JFrame frame2 = new Register();
-                frame2.setVisible(true);
+            public void actionPerformed(ActionEvent e) {
+                new Register(RoomManager); 
                 dispose();
             }
         });
