@@ -11,9 +11,11 @@ public class Patient {
     private String guardianContact;
     private String relationship;
     private Room assignedRoom;
+    private boolean discharged;
 
     public Patient(String surname, String firstName, String middleName, String birthDate,
-                   String gender, String contactNumber, String email, String address) {
+                   String gender, String contactNumber, String email, String address,
+                   String guardianName, String guardianContact, String relationship) {
         this.surname = surname;
         this.firstName = firstName;
         this.middleName = middleName;
@@ -22,9 +24,13 @@ public class Patient {
         this.contactNumber = contactNumber;
         this.email = email;
         this.address = address;
+        this.guardianName = guardianName;
+        this.guardianContact = guardianContact;
+        this.relationship = relationship;
+        this.discharged = false;
     }
 
-    // Getters and setters
+   
     public String getSurname() { return surname; }
     public void setSurname(String surname) { this.surname = surname; }
 
@@ -60,4 +66,13 @@ public class Patient {
 
     public Room getAssignedRoom() { return assignedRoom; }
     public void setAssignedRoom(Room assignedRoom) { this.assignedRoom = assignedRoom; }
+
+    public boolean isDischarged() { return discharged; }
+    public void setDischarged(boolean discharged) { this.discharged = discharged; }
+
+    @Override
+    public String toString() {
+        return String.format("%s, %s %s - %s", surname, firstName, middleName, birthDate);
+    }
 }
+

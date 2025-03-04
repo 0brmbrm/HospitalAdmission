@@ -1,16 +1,18 @@
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.*;
 
 public class KinInfo extends JFrame {
     private JTextField guardianNameField, guardianContactField, relationshipField;
     private RoomManager roomManager;
+    private PatientManager patientManager;
     private Patient patient;
 
-    public KinInfo(RoomManager roomManager, Patient patient) {
+    public KinInfo(RoomManager roomManager, Patient patient, PatientManager patientManager) {
         this.roomManager = roomManager;
         this.patient = patient;
+        this.patientManager = patientManager;
 
         setTitle("Guardian Information");
         setSize(300, 200);
@@ -29,6 +31,9 @@ public class KinInfo extends JFrame {
         relationshipField = new JTextField();
         add(relationshipField);
 
+        JButton back = new JButton("Back");
+        add(back);
+
         JButton nextButton = new JButton("Next");
         add(nextButton);
 
@@ -37,9 +42,18 @@ public class KinInfo extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (validateFields()) {
                     updatePatient();
-                    new RoomAssignment(roomManager, patient);
+                    new RoomAssignment(roomManager, patient, patientManager);
                     dispose();
                 }
+            }
+        });
+
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                Register registerFrame = new Register(roomManager, patientManager);
+                registerFrame.setVisible(true);
+                dispose();
             }
         });
 
@@ -61,3 +75,4 @@ public class KinInfo extends JFrame {
         patient.setRelationship(relationshipField.getText());
     }
 }
+

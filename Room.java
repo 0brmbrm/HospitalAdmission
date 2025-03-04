@@ -28,3 +28,4 @@ public class Room {
         return type + (isAvailable ? " (Available)" : " (Occupied)");
     }
 }
+

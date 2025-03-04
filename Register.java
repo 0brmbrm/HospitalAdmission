@@ -2,90 +2,75 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-class Patient {
-    private String surname, firstName, middleName, birthDate, gender, contactNumber, email, address;
-    private String guardianName, guardianContact, relationship;
-
-    public Patient(String surname, String firstName, String middleName, String birthDate, String gender,
-                   String contactNumber, String email, String address) {
-        this.surname = surname;
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.birthDate = birthDate;
-        this.gender = gender;
-        this.contactNumber = contactNumber;
-        this.email = email;
-        this.address = address;
-    }
-
-    public void setGuardianName(String guardianName) {
-        this.guardianName = guardianName;
-    }
-
-    public void setGuardianContact(String guardianContact) {
-        this.guardianContact = guardianContact;
-    }
-
-    public void setRelationship(String relationship) {
-        this.relationship = relationship;
-    }
-}
-
-
-
 public class Register extends JFrame {
-    private JTextField surname, first, middle, number, email, ress;
-    private JTextField ksurname, kfirst, kmiddle, knumber, kemail, relationshipField;
-    private JComboBox<String> bdaymonth, bdaydays, bdayyears;
-    private ButtonGroup genders;
+    private RoomManager roomManager;
+    private PatientManager patientManager;
+    private Patient patientToEdit;
 
-    public Register() {
-        setTitle("Register Patient and Guardian");
+    private JTextField surname, first, middle, number, email, ress;
+    private JComboBox<String> bdaymonth, bdaydays, bdayyears;
+    private JRadioButton male, female;
+    private ButtonGroup genders;
+    private JTextField guardianNameField, guardianContactField, relationshipField;
+
+    public Register(RoomManager roomManager, PatientManager patientManager) {
+        this(roomManager, patientManager, null);
+    }
+
+    public Register(RoomManager roomManager, PatientManager patientManager, Patient patientToEdit) { 
+        this.roomManager = roomManager; 
+        this.patientManager = patientManager;
+        this.patientToEdit = patientToEdit;
+
+        setTitle("Register Patient");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1015, 550);
+        setSize(600,600);
         setResizable(false);
         setLayout(null);
 
         JLabel info = new JLabel("Fill out patient's information");
-        info.setBounds(20, 20, 200, 50);
+        info.setBounds(30,20,200,50);
         add(info);
 
         JLabel name = new JLabel("Full Name:");
-        name.setBounds(20, 75, 150, 50);
+        name.setBounds(30,75,150,50);
         add(name);
 
         JLabel surexample = new JLabel("Surname");
-        surexample.setBounds(95, 99, 200, 50);
+        surexample.setBounds(127,99,200,50);
         add(surexample);
         JLabel firexample = new JLabel("First Name");
-        firexample.setBounds(230, 99, 200, 50);
+        firexample.setBounds(264,99,200,50);
         add(firexample);
         JLabel midexample = new JLabel("Middle Name");
-        midexample.setBounds(365, 99, 200, 50);
+        midexample.setBounds(401,99,200,50);
         add(midexample);
 
         surname = new JTextField();
-        surname.setBounds(90, 89, 125, 25);
+        surname.setBounds(125,89, 125, 25);
         add(surname);
         first = new JTextField();
-        first.setBounds(225, 89, 125, 25);
+        first.setBounds(260,89, 125, 25);
         add(first);
         middle = new JTextField();
-        middle.setBounds(360, 89, 125, 25);
+        middle.setBounds(395,89, 125, 25);
         add(middle);
 
         JLabel bday = new JLabel("Birth Date:");
-        bday.setBounds(20, 140, 150, 50);
+        bday.setBounds(30,140,150, 50);
         add(bday);
 
-        String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        String[] months = {"January","February","March","April","May","June","July","August","September","October","November","December"};
         bdaymonth = new JComboBox<>(months);
-        bdaymonth.setBounds(90, 153, 100, 25);
+        bdaymonth.setBounds(125,153,100,25);
         add(bdaymonth);
 
-        String[] days = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
+        String[] days = new String[31];
+        for (int i = 0; i < 31; i++) {
+            days[i] = String.format("%02d", i + 1);
+        }
         bdaydays = new JComboBox<>(days);
-        bdaydays.setBounds(225, 153, 100, 25);
+        bdaydays.setBounds(260,153,100,25);
         add(bdaydays);
 
         String[] years = new String[100];
@@ -93,17 +78,17 @@ public class Register extends JFrame {
             years[i] = 2025 - i + "";
         }
         bdayyears = new JComboBox<>(years);
-        bdayyears.setBounds(360, 153, 100, 25);
+        bdayyears.setBounds(395,153,100,25);
         add(bdayyears);
 
         JLabel gender = new JLabel("Gender:");
-        gender.setBounds(20, 190, 150, 50);
+        gender.setBounds(30,190,150, 50);
         add(gender);
 
-        JRadioButton male = new JRadioButton("Male");
-        male.setBounds(90, 203, 70, 25);
-        JRadioButton female = new JRadioButton("Female");
-        female.setBounds(150, 203, 100, 25);
+        male = new JRadioButton("Male");
+        male.setBounds(125,203,70,25);
+        female = new JRadioButton("Female");
+        female.setBounds(200,203,100,25);
         genders = new ButtonGroup();
         genders.add(male);
         genders.add(female);
@@ -111,137 +96,92 @@ public class Register extends JFrame {
         add(female);
 
         JLabel contact = new JLabel("Contact Information:");
-        contact.setBounds(20, 225, 150, 50);
+        contact.setBounds(30,235,150, 50);
         add(contact);
 
         JLabel numinfo = new JLabel("Contact Number");
-        numinfo.setBounds(115, 280, 150, 50);
+        numinfo.setBounds(115,300,150, 50);
         add(numinfo);
         JLabel emailinfo = new JLabel("Email");
-        emailinfo.setBounds(315, 280, 150, 50);
+        emailinfo.setBounds(315,300,150, 50);
         add(emailinfo);
 
         number = new JTextField();
-        number.setBounds(100, 270, 150, 25);
+        number.setBounds(100,285, 150, 25);
         add(number);
         email = new JTextField();
-        email.setBounds(300, 270, 150, 25);
+        email.setBounds(300,285, 150, 25);
         add(email);
 
         JLabel address = new JLabel("Address:");
-        address.setBounds(20, 325, 150, 50);
+        address.setBounds(30,337,150, 50);
         add(address);
 
         ress = new JTextField();
-        ress.setBounds(100, 340, 350, 25);
+        ress.setBounds(100, 350, 350, 25);
         add(ress);
 
-        JSeparator sep = new JSeparator(SwingConstants.VERTICAL);
-        sep.setBounds(480, 20, 10, 450);
-        add(sep);
+        
+        JLabel guardianLabel = new JLabel("Guardian Information:");
+        guardianLabel.setBounds(30, 380, 150, 50);
+        add(guardianLabel);
 
-        JLabel kinfo = new JLabel("Fill out guardian's information");
-        kinfo.setBounds(520, 20, 200, 50);
-        add(kinfo);
+        JLabel guardianNameLabel = new JLabel("Guardian Name:");
+        guardianNameLabel.setBounds(30, 420, 100, 25);
+        add(guardianNameLabel);
+        guardianNameField = new JTextField();
+        guardianNameField.setBounds(140, 420, 200, 25);
+        add(guardianNameField);
 
-        JLabel kname = new JLabel("Full Name:");
-        kname.setBounds(520, 75, 150, 50);
-        add(kname);
+        JLabel guardianContactLabel = new JLabel("Guardian Contact:");
+        guardianContactLabel.setBounds(30, 450, 100, 25);
+        add(guardianContactLabel);
+        guardianContactField = new JTextField();
+        guardianContactField.setBounds(140, 450, 200, 25);
+        add(guardianContactField);
 
-        JLabel ksurexample = new JLabel("Surname");
-        ksurexample.setBounds(595, 99, 200, 50);
-        add(ksurexample);
-        JLabel kfirexample = new JLabel("First Name");
-        kfirexample.setBounds(730, 99, 200, 50);
-        add(kfirexample);
-        JLabel kmidexample = new JLabel("Middle Name");
-        kmidexample.setBounds(865, 99, 200, 50);
-        add(kmidexample);
+        JLabel relationshipLabel = new JLabel("Relationship:");
+        relationshipLabel.setBounds(30, 480, 100, 25);
+        add(relationshipLabel);
+        relationshipField = new JTextField();
+        relationshipField.setBounds(140, 480, 200, 25);
+        add(relationshipField);
 
-        ksurname = new JTextField();
-        ksurname.setBounds(590, 89, 125, 25);
-        add(ksurname);
-        kfirst = new JTextField();
-        kfirst.setBounds(725, 89, 125, 25);
-        add(kfirst);
-        kmiddle = new JTextField();
-        kmiddle.setBounds(860, 89, 125, 25);
-        add(kmiddle);
-
-        JLabel relation = new JLabel("Relationship to Patient:");
-        relation.setBounds(520, 140, 150, 50);
-        add(relation);
-
-        String[] relate = {"Spouse", "Mother", "Father", "Child", "Others"};
-        JComboBox<String> relationPatient = new JComboBox<>(relate);
-        relationPatient.setBounds(595, 190, 100, 25);
-        add(relationPatient);
-
-        JLabel specify = new JLabel("If others, specify");
-        specify.setBounds(730, 210, 100, 25);
-        add(specify);
-
-        JTextField others = new JTextField();
-        others.setBounds(725, 190, 150, 25);
-        add(others);
-
-        JLabel kcontact = new JLabel("Contact Information:");
-        kcontact.setBounds(520, 225, 150, 50);
-        add(kcontact);
-
-        JLabel knuminfo = new JLabel("Contact Number");
-        knuminfo.setBounds(615, 280, 150, 50);
-        add(knuminfo);
-        JLabel kemailinfo = new JLabel("Email");
-        kemailinfo.setBounds(815, 280, 150, 50);
-        add(kemailinfo);
-
-        knumber = new JTextField();
-        knumber.setBounds(600, 270, 150, 25);
-        add(knumber);
-        kemail = new JTextField();
-        kemail.setBounds(800, 270, 150, 25);
-        add(kemail);
 
         JButton back = new JButton("Back");
-        back.setBounds(30, 450, 65, 20);
+        back.setBounds(30,520,65,20);
         add(back);
 
         JButton clear = new JButton("Clear");
-        clear.setBounds(105, 450, 65, 20);
+        clear.setBounds(105,520,65,20);
         add(clear);
 
         JButton next = new JButton("Next");
-        next.setBounds(900, 450, 65, 20);
+        next.setBounds(490,520,65,20);
         add(next);
+
+        if (patientToEdit != null) {
+            populateFields(patientToEdit);
+        }
 
         clear.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                surname.setText("");
-                first.setText("");
-                middle.setText("");
-                bdaymonth.setSelectedIndex(0);
-                bdaydays.setSelectedIndex(0);
-                bdayyears.setSelectedIndex(0);
+            public void actionPerformed(ActionEvent e){
+                surname.setText(""); first.setText(""); middle.setText("");
+                bdaymonth.setSelectedIndex(0); bdaydays.setSelectedIndex(0); bdayyears.setSelectedIndex(0);
                 genders.clearSelection();
-                number.setText("");
-                email.setText("");
+                number.setText(""); email.setText("");
                 ress.setText("");
-                ksurname.setText("");
-                kfirst.setText("");
-                kmiddle.setText("");
-                relationPatient.setSelectedIndex(0);
-                others.setText("");
-                knumber.setText("");
-                kemail.setText("");
+                guardianNameField.setText("");
+                guardianContactField.setText("");
+                relationshipField.setText("");
             }
         });
 
         back.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                Menu frame1 = new Menu();
+            public void actionPerformed(ActionEvent e){
+                Menu frame1 = new Menu(patientManager);
                 frame1.setVisible(true);
                 dispose();
             }
@@ -250,29 +190,95 @@ public class Register extends JFrame {
         next.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String patientSurname = surname.getText();
-                String patientFirstName = first.getText();
-                String patientMiddleName = middle.getText();
-                String patientBirthDate = bdaydays.getSelectedItem() + " " + bdaymonth.getSelectedItem() + " " + bdayyears.getSelectedItem();
-                String patientGender = male.isSelected() ? "Male" : "Female";
-                String patientContactNumber = number.getText();
-                String patientEmail = email.getText();
-                String patientAddress = ress.getText();
-
-                Patient patient = new Patient(patientSurname, patientFirstName, patientMiddleName, patientBirthDate,
-                        patientGender, patientContactNumber, patientEmail, patientAddress);
-
-                String guardianFullName = ksurname.getText() + " " + kfirst.getText() + " " + kmiddle.getText();
-                patient.setGuardianName(guardianFullName);
-                patient.setGuardianContact(knumber.getText());
-                patient.setRelationship(relationshipField.getText());
-                dispose();
+                if (validateFields()) {
+                    Patient patient = createPatient();
+                    RoomAssignment roomAssignmentFrame = new RoomAssignment(roomManager, patient, patientManager);
+                    roomAssignmentFrame.setVisible(true);
+                    dispose();
+                }
             }
         });
+
+        setLocationRelativeTo(null);
     }
 
-    public static void main(String[] args) {
-        Register register = new Register();
-        register.setVisible(true);
+    private void populateFields(Patient patient) {
+        surname.setText(patient.getSurname());
+        first.setText(patient.getFirstName());
+        middle.setText(patient.getMiddleName());
+
+        String[] birthDateParts = patient.getBirthDate().split(" ");
+        bdaydays.setSelectedItem(birthDateParts[0]);
+        bdaymonth.setSelectedItem(birthDateParts[1]);
+        bdayyears.setSelectedItem(birthDateParts[2]);
+
+        if (patient.getGender().equals("Male")) {
+            male.setSelected(true);
+        } else {
+            female.setSelected(true);
+        }
+
+        number.setText(patient.getContactNumber());
+        email.setText(patient.getEmail());
+        ress.setText(patient.getAddress());
+        guardianNameField.setText(patient.getGuardianName());
+        guardianContactField.setText(patient.getGuardianContact());
+        relationshipField.setText(patient.getRelationship());
+    }
+
+    private boolean validateFields() {
+        if (surname.getText().trim().isEmpty() || first.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Surname and First Name are required fields.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (!male.isSelected() && !female.isSelected()) {
+            JOptionPane.showMessageDialog(this, "Please select a gender.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (guardianNameField.getText().trim().isEmpty() ||
+            guardianContactField.getText().trim().isEmpty() ||
+            relationshipField.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill all guardian information fields.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+
+    private Patient createPatient() {
+        String patientSurname = surname.getText().trim();
+        String patientFirstName = first.getText().trim();
+        String patientMiddleName = middle.getText().trim();
+        String patientBirthDate = bdaydays.getSelectedItem() + " " + bdaymonth.getSelectedItem() + " " + bdayyears.getSelectedItem();
+        String patientGender = male.isSelected() ? "Male" : "Female";
+        String patientContactNumber = number.getText().trim();
+        String patientEmail = email.getText().trim();
+        String patientAddress = ress.getText().trim();
+        String guardianName = guardianNameField.getText().trim();
+        String guardianContact = guardianContactField.getText().trim();
+        String relationship = relationshipField.getText().trim();
+
+        if (patientToEdit != null) {
+            // Update existing patient
+            patientToEdit.setSurname(patientSurname);
+            patientToEdit.setFirstName(patientFirstName);
+            patientToEdit.setMiddleName(patientMiddleName);
+            patientToEdit.setBirthDate(patientBirthDate);
+            patientToEdit.setGender(patientGender);
+            patientToEdit.setContactNumber(patientContactNumber);
+            patientToEdit.setEmail(patientEmail);
+            patientToEdit.setAddress(patientAddress);
+            patientToEdit.setGuardianName(guardianName);
+            patientToEdit.setGuardianContact(guardianContact);
+            patientToEdit.setRelationship(relationship);
+            return patientToEdit;
+        } else {
+            // Create new patient
+            return new Patient(patientSurname, patientFirstName, patientMiddleName, patientBirthDate,
+                    patientGender, patientContactNumber, patientEmail, patientAddress,
+                    guardianName, guardianContact, relationship);
+        }
     }
 }
+
