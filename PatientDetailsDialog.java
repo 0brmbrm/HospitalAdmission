@@ -21,7 +21,7 @@ public class PatientDetailsDialog extends JDialog {
         Font boldFont = new Font("SansSerif", Font.BOLD, 14);
         Font normalFont = new Font("SansSerif", Font.PLAIN, 14);
         
-        // Display Patient Details
+        
         JLabel nameLabel = new JLabel("Name:");
         nameLabel.setFont(boldFont);
         nameLabel.setBounds(10, 10, 100, 20);
@@ -82,7 +82,7 @@ public class PatientDetailsDialog extends JDialog {
         addressValue.setBounds(120, 160, 300, 20);
         panel.add(addressValue);
         
-        // Display Guardian Information
+        
         JLabel guardianLabel = new JLabel("Guardian:");
         guardianLabel.setFont(boldFont);
         guardianLabel.setBounds(10, 190, 100, 20);
@@ -113,7 +113,7 @@ public class PatientDetailsDialog extends JDialog {
         relationshipValue.setBounds(120, 250, 300, 20);
         panel.add(relationshipValue);
         
-        // Display Room Information
+       
         JLabel roomLabel = new JLabel("Assigned Room:");
         roomLabel.setFont(boldFont);
         roomLabel.setBounds(10, 280, 150, 20);
@@ -125,7 +125,7 @@ public class PatientDetailsDialog extends JDialog {
         roomValue.setBounds(160, 280, 300, 20);
         panel.add(roomValue);
         
-        // Display Status
+        
         JLabel statusLabel = new JLabel("Status:");
         statusLabel.setFont(boldFont);
         statusLabel.setBounds(10, 310, 100, 20);
@@ -136,7 +136,7 @@ public class PatientDetailsDialog extends JDialog {
         statusValue.setBounds(120, 310, 300, 20);
         panel.add(statusValue);
         
-        // Close Button
+      
         JButton closeButton = new JButton("Close");
         closeButton.setBounds(180, 350, 100, 30);
         panel.add(closeButton);
