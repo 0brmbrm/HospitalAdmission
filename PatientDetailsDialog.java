@@ -18,7 +18,7 @@ public class PatientDetailsDialog extends JDialog {
         panel.setBorder(BorderFactory.createCompoundBorder(border, 
             BorderFactory.createEmptyBorder(10, 10, 10, 10)));
             
-        Font boldFont = new Font("SansSerif", Font.BOLD, 14);
+        Font boldFont = new Font("SansSerif", Font.BOLD, 16);
         Font normalFont = new Font("SansSerif", Font.PLAIN, 14);
         
         
