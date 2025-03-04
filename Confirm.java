@@ -126,7 +126,7 @@ public class Confirm extends JFrame {
         roomValue.setBounds(160, 280, 300, 20);
         panel.add(roomValue);
 
-        // CONFIRM BUTTON - Saves the record & returns to Menu
+        
         JButton confirmButton = new JButton("Confirm");
         confirmButton.setBounds(100, 400, 100, 30);
         panel.add(confirmButton);

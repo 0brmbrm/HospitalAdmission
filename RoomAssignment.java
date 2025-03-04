@@ -21,10 +21,10 @@ public class RoomAssignment extends JFrame {
 
         add(new JLabel("Select Room:"));
 
-        // Check if there are available rooms
+       
         if (roomManager.getAvailableRooms().isEmpty()) {
             JOptionPane.showMessageDialog(this, "No rooms are available.", "No Rooms", JOptionPane.WARNING_MESSAGE);
-            // Add a dummy item to prevent null pointer
+           
             roomComboBox = new JComboBox<>(new Room[]{new Room("No Available Rooms")});
         } else {
             roomComboBox = new JComboBox<>(roomManager.getAvailableRooms().toArray(new Room[0]));

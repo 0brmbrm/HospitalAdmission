@@ -260,7 +260,7 @@ public class Register extends JFrame {
         String relationship = relationshipField.getText().trim();
 
         if (patientToEdit != null) {
-            // Update existing patient
+           
             patientToEdit.setSurname(patientSurname);
             patientToEdit.setFirstName(patientFirstName);
             patientToEdit.setMiddleName(patientMiddleName);
@@ -274,7 +274,7 @@ public class Register extends JFrame {
             patientToEdit.setRelationship(relationship);
             return patientToEdit;
         } else {
-            // Create new patient
+         
             return new Patient(patientSurname, patientFirstName, patientMiddleName, patientBirthDate,
                     patientGender, patientContactNumber, patientEmail, patientAddress,
                     guardianName, guardianContact, relationship);
