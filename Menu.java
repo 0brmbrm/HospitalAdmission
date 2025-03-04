@@ -29,7 +29,7 @@ public class Menu extends JFrame {
        
         JButton button1 = new JButton("Register Patient");
         if (registerIcon.getIconWidth() > 0) {
-            // Resize icon if needed
+          
             Image img = registerIcon.getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH);
             button1.setIcon(new ImageIcon(img));
             button1.setIconTextGap(10);
