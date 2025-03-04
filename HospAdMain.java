@@ -1,9 +1,21 @@
-
 import javax.swing.*;
 
 public class HospAdMain {
     public static void main(String[] args) {
-        JFrame frame1 = new Menu();
-        frame1.setVisible(true);
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                
+                PatientManager patientManager = new PatientManager();
+                Menu mainMenu = new Menu(patientManager);
+                mainMenu.setVisible(true);
+            }
+        });
     }    
 }
+
